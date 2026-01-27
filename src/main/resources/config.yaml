@@ -1,0 +1,12 @@
+https:
+  host: "localhost"
+  port: "8081"
+  
+canvas:
+  token: "15721~B4DcruuVWkL3TUFcLteuNBcLuuF7Wzn4eVGGUD8A348MVhVBDUQHvwEyMvZkwHZn"
+  baseUri: "https://salesforce.instructure.com/api/v1"
+
+sf:
+  username: "aurosmit.sahoo@nexturn.com.lms.educloud"
+  password: "Aurosmit@2001"
+  securityToken: "wEpfQlYMXv8VvhsNwrGqlptQl"
