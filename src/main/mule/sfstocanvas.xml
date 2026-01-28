@@ -58,11 +58,11 @@ output application/json
 				<ee:set-variable variableName="accountId" ><![CDATA[%dw 2.0
 output application/json
 ---
-payload.Canvas_Account_ID__c as Number]]></ee:set-variable>
+payload.Canvas_Account_ID_c as Number]]></ee:set-variable>
 			</ee:variables>
 		</ee:transform>
 		<logger level="INFO" doc:name="Canvas Request Logger" doc:id="e4af8fcf-9141-4abd-bf7d-145033d8e754" message="#[payload]"/>
-		<canvas:create-course doc:name="Course - Create a new course" doc:id="5098c81c-f914-4d27-bc92-10e7cb0ee061" config-ref="Canvas_config" account_id="#[vars.account_id]" correlationId="#[correlationId]"/>
+		<canvas:create-course doc:name="Course - Create a new course" doc:id="5098c81c-f914-4d27-bc92-10e7cb0ee061" config-ref="Canvas_config" account_id="#[vars.accountId]" correlationId="#[correlationId]"/>
 		<ee:transform doc:name="canvasResponse" doc:id="75dcdcb9-ff67-4400-9a1e-d223c2dc8964" >
 			<ee:message >
 				<ee:set-payload ><![CDATA[%dw 2.0
