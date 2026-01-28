@@ -2,7 +2,7 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>7b448b0c-0c88-4d60-af83-bb5cf4f2df02</groupId>
+	<groupId>com.mycompany</groupId>
 	<artifactId>canvas-lms-uc</artifactId>
 	<version>1.0.0-SNAPSHOT</version>
 	<packaging>mule-application</packaging>
@@ -50,6 +50,12 @@
 			<groupId>1c84124b-acf1-4c20-80bf-5a1a266bfbb6</groupId>
 			<artifactId>canvas-anypoint-connector-model</artifactId>
 			<version>1.0.3-SNAPSHOT</version>
+			<classifier>mule-plugin</classifier>
+		</dependency>
+		<dependency>
+			<groupId>com.mulesoft.connectors</groupId>
+			<artifactId>mule-salesforce-connector</artifactId>
+			<version>10.20.0</version>
 			<classifier>mule-plugin</classifier>
 		</dependency>
 	</dependencies>
