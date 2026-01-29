@@ -22,10 +22,10 @@ output application/json
 {
 	"course": {
 		"name": payload.Name default "",
-		"course_code": payload.Course_Code__c default "",
-		"start_at": payload.Start_At__c as String default "",
-		"end_at": payload.End_At__c as String default "",
-		"license": payload.License__c default "",
+		"course_code": payload.Course_Code__c default "NC101",
+		"start_at": payload.Start_At__c as String default "2025-09-01T08:00:00Z",
+		"end_at": payload.End_At__c as String default "2026-05-15T17:00:00.000Z",
+		"license": payload.License__c default "cc_by_nc",
 		"is_public": payload.Is_Public__c as Boolean default true,
 		"is_public_to_auth_users": payload.Is_Public_to_Auth_Users__c as Boolean default true,
 		"public_syllabus": payload.Public_Syllabus__c as Boolean default true,
@@ -37,18 +37,18 @@ output application/json
 		"open_enrollment": payload.Open_Enrollment__c as Boolean default true,
 		"self_enrollment": payload.Self_Enrollment__c as Boolean default true,
 		"restrict_enrollments_to_course_dates": payload.Restrict_Enrollments_to_Course_Dates__c as Boolean default true,
-		"term_id": payload.Term_Id__c as Number default 1,
+		"term_id": payload.Term_Id__c as Number as String default "1",
 		"sis_course_id": payload.SIS_Course_ID__c default "",
 		"hide_final_grades": payload.Hide_Final_Grades__c as Boolean default true,
 		"apply_assignment_group_weights": payload.Apply_Assignment_Group_Weights__c as Boolean default true,
-		"time_zone": payload.Time_Zone__c default "",
-		"default_view": payload.Default_View__c default "",
-		"syllabus_body": payload.Syllabus_Body__c default "",
-		"grade_passback_setting": payload.Grade_Passback_Setting__c default "",
-		"course_format": payload.Course_Format__c default "",
+		"time_zone": payload.Time_Zone__c default "America/Denver",
+		"default_view": payload.Default_View__c default "modules",
+		"syllabus_body": payload.Syllabus_Body__c default "<p>test</p>",
+		"grade_passback_setting": payload.Grade_Passback_Setting__c default "nightly_sync",
+		"course_format": payload.Course_Format__c default "online",
 		"post_manually": payload.Post_Manually__c as Boolean default true
 	},
-	"offer": payload.Offer__c default true,
+	"offer": payload.Offer__c as Boolean default true,
 	"enroll_me": payload.Enroll_Me__c as Boolean,
 	"skip_course_template": payload.Skip_Course_Template__c as Boolean default true,
 	"enable_sis_reactivation": payload.Enable_SIS_Reactivation__c as Boolean default true
@@ -58,11 +58,11 @@ output application/json
 				<ee:set-variable variableName="accountId" ><![CDATA[%dw 2.0
 output application/json
 ---
-payload.Canvas_Account_ID_c as Number]]></ee:set-variable>
+payload.Canvas_Account_ID__c as Number as String]]></ee:set-variable>
 			</ee:variables>
 		</ee:transform>
 		<logger level="INFO" doc:name="Canvas Request Logger" doc:id="e4af8fcf-9141-4abd-bf7d-145033d8e754" message="#[payload]"/>
-		<canvas:create-course doc:name="Course - Create a new course" doc:id="5098c81c-f914-4d27-bc92-10e7cb0ee061" config-ref="Canvas_config" account_id="#[vars.accountId]" correlationId="#[correlationId]"/>
+		<canvas:create-course doc:name="Course - Create a new course" doc:id="c52420bc-11c4-4060-b53e-8230bb7f3897" config-ref="Canvas_config" account_id="#[vars.accountId]" correlationId="#[correlationId]"/>
 		<ee:transform doc:name="canvasResponse" doc:id="75dcdcb9-ff67-4400-9a1e-d223c2dc8964" >
 			<ee:message >
 				<ee:set-payload ><![CDATA[%dw 2.0
@@ -71,13 +71,30 @@ output application/json
 payload]]></ee:set-payload>
 			</ee:message>
 		</ee:transform>
-		<logger level="INFO" doc:name="Canvas Response Logger" doc:id="e4fc0d54-630e-4c20-920b-6b7d1751dc16" message="#[Payload]"/>
-		<logger level="INFO" doc:name="Salesforce to Canvas Create Flow Ended Logger" doc:id="a07d05ea-8950-48c1-b490-4e64c118271d" message="Salesforce to Canvas Create Flow Ended"/>
+		<logger level="INFO" doc:name="Canvas Response Logger" doc:id="e4fc0d54-630e-4c20-920b-6b7d1751dc16" message="#[payload]"/>
+		<ee:transform doc:name="Build Salesforce Update Payload" doc:id="690ae1ef-4533-4c35-92a8-5030b8cce2d9" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[%dw 2.0
+output application/json
+---
+[
+	{
+		
+		Canvas_Course_ID__c: payload.id as String,
+		Name: payload.name
+	}
+]]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+		<logger level="INFO" doc:name="SF Update Request Logger" doc:id="87a94671-9e15-4763-bf3d-8c8445571341" message="#[payload]" />
+		<salesforce:upsert objectType="Course__c" externalIdFieldName="Name" doc:name="Update Salesforce - Canvas Course ID" doc:id="53b94e9b-ab9e-40ec-841c-da8a0c875bfc" config-ref="Salesforce_Config" />
+		<logger level="INFO" doc:name="Update SF Response Logger" doc:id="bce46205-d508-49c1-9ebb-912d6cf9d2f6" message="#[%dw 2.0&#10;output application/json&#10;---&#10;payload]" />
+		<logger level="INFO" doc:name="Salesforce to Canvas Create Flow Ended Logger" doc:id="759d0222-ace6-48bc-90b6-6a4714bef7a9" message="Salesforce to Canvas Create Flow Ended" />
 	</flow>
 	<flow name="sftocanvasUpdateFlow" doc:id="888aba95-b224-40de-adb4-29fb92d9fbb5" >
 		<salesforce:modified-object-listener doc:name="On Modified Object" doc:id="59d86138-9a12-4e84-9659-243af016fbc2" config-ref="Salesforce_Config" objectType="Course__c">
 			<scheduling-strategy >
-				<fixed-frequency />
+				<fixed-frequency frequency="2000"/>
 			</scheduling-strategy>
 		</salesforce:modified-object-listener>
 		<logger level="INFO" doc:name="Salesforce to Canvas Update Flow Started Logger" doc:id="9e4dc13a-8fe5-4a43-9849-70198615eff0" message="Salesforce to Canvas Update Flow Started"/>
@@ -119,12 +136,12 @@ output application/json
         ("integration_id": payload.Integration_Id__c) if (!isEmpty(payload.Integration_Id__c)),
         ("grading_standard_id": payload.Grading_Standard_ID__c)if (!isEmpty(payload.Grading_Standard_ID__c)),
          "blueprint": false,
-        ("template": payload.Template__c) if (!isEmpty(payload.Template__c)),
+        ("template": payload.Template__c as Boolean) if (!isEmpty(payload.Template__c)),
         ("course_color": payload.Course_Color__c) if (!isEmpty(payload.Course_Color__c)),
         ("friendly_name": payload.Friendly_Name__c) if(!isEmpty(payload.Friendly_Name__c)),
        ("conditional_release": payload.Conditional_Release__c) if (!isEmpty(payload.Conditional_Release__c))
     },
-    "offer": payload.Offer__c default true,
+    "offer": payload.Offer__c as Boolean default true,
 }]]></ee:set-payload>
 			</ee:message>
 			<ee:variables >
@@ -147,11 +164,11 @@ payload]]></ee:set-payload>
 	<flow name="sfstocanvasFlow" doc:id="6b4ec96d-a7c9-4909-b747-1b3fa074d11f" >
 		<salesforce:deleted-object-listener doc:name="On Deleted Object" doc:id="3f6835fa-6aa1-47fc-8110-a064c8372d7c" config-ref="Salesforce_Config" objectType="Course__c">
 			<scheduling-strategy >
-				<fixed-frequency />
+				<fixed-frequency frequency="3000"/>
 			</scheduling-strategy>
 		</salesforce:deleted-object-listener>
 		<logger level="INFO" doc:name="Salesforce to Canvas Delete Flow Started Logger" doc:id="743aec1f-5fc5-4c46-881f-424544fa49e9" message="Salesforce to Canvas Delete Flow Started"/>
-		<logger level="INFO" doc:name="SF Payload Logger" doc:id="0d5d5cd0-6799-4114-9330-62b90c9efdd6" message="#[Payload]"/>
+		<logger level="INFO" doc:name="SF Payload Logger" doc:id="0d5d5cd0-6799-4114-9330-62b90c9efdd6" message="#[payload]"/>
 		<ee:transform doc:name="canvas Id" doc:id="2351fbcb-8ee6-4def-ada2-338614c2f7bb" >
 			<ee:message >
 			</ee:message>
