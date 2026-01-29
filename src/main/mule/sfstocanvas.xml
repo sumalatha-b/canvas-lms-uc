@@ -106,12 +106,12 @@ output application/json
 ---
 {
     "course": {
-    	"account_id": payload.Canvas_Account_ID__c as Number,
+    	//"account_id": payload.Canvas_Account_ID__c as Number,
         "name": payload.Name default "",
-        "course_code": payload.Course_Code__c default "",
-        "start_at": payload.Start_At__c as String default "",
-        "end_at": payload.End_At__c as String default "",
-        "license": payload.License__c default "",
+        "course_code": payload.Course_Code__c default "NC101",
+        "start_at": payload.Start_At__c as String default "2025-09-01T08:00:00Z",
+        "end_at": payload.End_At__c as String default "2025-09-01T09:00:00Z",
+        "license": payload.License__c default "cc_by_nc",
         "is_public": payload.Is_Public__c as Boolean default true,
         "is_public_to_auth_users": payload.Is_Public_to_Auth_Users__c as Boolean default true,
         "public_syllabus": payload.Public_Syllabus__c as Boolean default true,
@@ -123,8 +123,8 @@ output application/json
         "open_enrollment": payload.Open_Enrollment__c as Boolean default true,
         "self_enrollment": payload.Self_Enrollment__c as Boolean default true,
         "restrict_enrollments_to_course_dates": payload.Restrict_Enrollments_to_Course_Dates__c as Boolean default true,
-        "term_id": payload.Term_Id__c as Number default 1,
-        "sis_course_id": payload.SIS_Course_ID__c default "",
+        //"term_id": payload.Term_Id__c as Number default 1,
+        // "sis_course_id": payload.SIS_Course_ID__c default "",
         "hide_final_grades": payload.Hide_Final_Grades__c as Boolean default true,
         "apply_assignment_group_weights": payload.Apply_Assignment_Group_Weights__c as Boolean default true,
         "time_zone": payload.Time_Zone__c default "",
@@ -133,15 +133,14 @@ output application/json
         "grade_passback_setting": payload.Grade_Passback_Setting__c default "",
         "course_format": payload.Course_Format__c default "",
         "post_manually": payload.Post_Manually__c as Boolean default true,
-        ("integration_id": payload.Integration_Id__c) if (!isEmpty(payload.Integration_Id__c)),
+       // ("integration_id": payload.Integration_Id__c) if (!isEmpty(payload.Integration_Id__c)),
         ("grading_standard_id": payload.Grading_Standard_ID__c)if (!isEmpty(payload.Grading_Standard_ID__c)),
          "blueprint": false,
-        ("template": payload.Template__c as Boolean) if (!isEmpty(payload.Template__c)),
+        ("template": false) if (!isEmpty(payload.Template__c)),
         ("course_color": payload.Course_Color__c) if (!isEmpty(payload.Course_Color__c)),
         ("friendly_name": payload.Friendly_Name__c) if(!isEmpty(payload.Friendly_Name__c)),
-       ("conditional_release": payload.Conditional_Release__c) if (!isEmpty(payload.Conditional_Release__c))
-    },
-    "offer": payload.Offer__c as Boolean default true,
+       ("conditional_release": false) if (!isEmpty(payload.Conditional_Release__c))
+    }
 }]]></ee:set-payload>
 			</ee:message>
 			<ee:variables >
