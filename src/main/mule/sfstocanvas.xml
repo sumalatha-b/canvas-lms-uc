@@ -30,7 +30,7 @@ output application/json
 		"is_public_to_auth_users": payload.Is_Public_to_Auth_Users__c as Boolean default true,
 		"public_syllabus": payload.Public_Syllabus__c as Boolean default true,
 		"public_syllabus_to_auth": payload.Public_Syllabus_to_Auth__c as Boolean default true,
-		"public_description": payload.Public_Description__c default "",
+		"public_description": payload.Public_Description__c default "Course description text here.",
 		"allow_student_wiki_edits": payload.Allow_Student_Wiki_Edits__c as Boolean default true,
 		"allow_wiki_comments": payload.Allow_Wiki_Comments__c as Boolean default true,
 		"allow_student_forum_attachments": payload.Allow_Student_Forum_Attachments__c as Boolean default true,
