@@ -20,7 +20,7 @@ output application/json --- payload default error.description]]]></http:body>
                 <ee:set-variable variableName="id">attributes.uriParams.'id'</ee:set-variable>
             </ee:variables>
         </ee:transform>
-		<canvas:update-course doc:name="Course - Update a course" doc:id="06560358-03a9-4fae-8b7a-da535141620a" config-ref="Canvas_config" id="#[vars.id]" correlationId="#[correlationId]"/>
+		<canvas:course-update-a-course doc:name="Course Update A Course" doc:id="a167e3a3-fdd2-4761-a435-a99cd4bf21d9" config-ref="Canvas_config" id="#[vars.id]" correlationId="#[correlationId]"/>
 		<error-handler ref="Global-Error-Handler" />
     
 </flow>
@@ -36,7 +36,7 @@ output application/json --- payload default error.description]]]></http:body>
                 <ee:set-variable variableName="id">attributes.uriParams.'id'</ee:set-variable>
             </ee:variables>
         </ee:transform>
-		<canvas:edit-section doc:name="Section - Edit a section" doc:id="f95d4c76-aa96-4a4c-bb32-d719e03bdd90" config-ref="Canvas_config" id="#[vars.id]" correlationId="#[correlationId]"/>
+		<canvas:section-edit-a-section doc:name="Section Edit A Section" doc:id="472cf5dd-34b6-421b-82cb-ac0a46d467fe" config-ref="Canvas_config" id="#[vars.id]" correlationId="#[correlationId]"/>
 		<error-handler ref="Global-Error-Handler" />
     
 </flow>
@@ -52,7 +52,7 @@ output application/json --- payload default error.description]]]></http:body>
                 <ee:set-variable variableName="id">attributes.uriParams.'id'</ee:set-variable>
             </ee:variables>
         </ee:transform>
-		<canvas:update-user doc:name="User - Edit a user" doc:id="e947ca22-e3a8-42c5-9ed9-0e0f70bad1d8" config-ref="Canvas_config" id="#[vars.id]" correlationId="#[correlationId]"/>
+		<canvas:user-edit-a-user doc:name="User Edit A User" doc:id="6e4992da-61c0-4150-a213-cadd59e3e10f" config-ref="Canvas_config" id="#[vars.id]" correlationId="#[correlationId]"/>
 		<error-handler ref="Global-Error-Handler" />
     
 </flow>
@@ -68,7 +68,7 @@ output application/json --- payload default error.description]]]></http:body>
                 <ee:set-variable variableName="id">attributes.uriParams.'id'</ee:set-variable>
             </ee:variables>
         </ee:transform>
-		<canvas:delete-course doc:name="Course - Delete/Conclude a course" doc:id="dfcec151-7026-4743-837a-98cc34b2bc30" config-ref="Canvas_config" id="#[vars.id]" event='#[attributes.queryParams.event default "Conclude"]' correlationId="#[correlationId]"/>
+		<canvas:course-delete-conclude-a-course doc:name="Course Delete Conclude A Course" doc:id="733afa59-94e3-4f2c-823b-4156a2223f34" config-ref="Canvas_config" id="#[vars.id]" event='#[attributes.queryParams.event default "delete"]' correlationId="#[correlationId]"/>
 		<error-handler ref="Global-Error-Handler" />
     
 </flow>
@@ -84,7 +84,7 @@ output application/json --- payload default error.description]]]></http:body>
                 <ee:set-variable variableName="id">attributes.uriParams.'id'</ee:set-variable>
             </ee:variables>
         </ee:transform>
-		<canvas:delete-section doc:name="Section - Delete a section" doc:id="ae12e536-9007-407f-8541-af8345318a5d" config-ref="Canvas_config" id="#[vars.id]" correlationId="#[correlationId]"/>
+		<canvas:section-delete-a-section doc:name="Section Delete A Section" doc:id="20adc013-2158-4459-b81e-892bc94cc503" config-ref="Canvas_config" id="#[vars.id]" correlationId="#[correlationId]"/>
 		<error-handler ref="Global-Error-Handler" />
     
 </flow>
@@ -100,7 +100,7 @@ output application/json --- payload default error.description]]]></http:body>
                 <ee:set-variable variableName="id">attributes.uriParams.'id'</ee:set-variable>
             </ee:variables>
         </ee:transform>
-		<canvas:de-crosslist-section doc:name="Section - De-cross-list a section" doc:id="d1f89589-ca33-4386-9270-b1ff17ad78f7" config-ref="Canvas_config" id="#[vars.id]" correlationId="#[correlationId]"/>
+		<canvas:section-de-cross-list-a-section doc:name="Section De Cross List A Section" doc:id="eb98e783-09c3-4072-9566-378bd58677ef" config-ref="Canvas_config" id="#[vars.id]" correlationId="#[correlationId]"/>
 		<error-handler ref="Global-Error-Handler" />
     
 </flow>
@@ -116,7 +116,7 @@ output application/json --- payload default error.description]]]></http:body>
                 <ee:set-variable variableName="account_id">attributes.uriParams.'account_id'</ee:set-variable>
             </ee:variables>
         </ee:transform>
-		<canvas:list-account-users doc:name="User - List users in account" doc:id="3b031e74-fad1-4c8c-a573-aa828f3d7674" config-ref="Canvas_config" account_id="#[vars.account_id]" correlationId="#[correlationId]"/>
+		<canvas:user-list-users-in-account doc:name="User List Users In Account" doc:id="80914ff4-743d-445b-be4f-895a0823182c" config-ref="Canvas_config" account_id="#[vars.account_id]" correlationId="#[correlationId]"/>
     </flow>
     <flow name="get:\courses\(course_id)\bulk_user_progress:canvas-lms-api-config">
         <http:listener doc:name="Listener" doc:id="542ec2c9-8d8f-4e29-a8c0-28fde7d0ead0" config-ref="HTTP_Listener_config" path="/courses/{course_id}/bulk_user_progress" allowedMethods="GET" >
@@ -130,7 +130,7 @@ output application/json --- payload default error.description]]]></http:body>
                 <ee:set-variable variableName="course_id">attributes.uriParams.'course_id'</ee:set-variable>
             </ee:variables>
         </ee:transform>
-		<canvas:get-bulk-user-progress doc:name="Course - Get bulk user progress" doc:id="99814aa6-1862-4fb1-ab16-35a8c76de667" config-ref="Canvas_config" course_id="#[vars.course_id]" correlationId="#[correlationId]"/>
+		<canvas:course-get-bulk-user-progress doc:name="Course Get Bulk User Progress" doc:id="933f2a45-42dd-4a32-b3df-dbc742a0a4d8" config-ref="Canvas_config" course_id="#[vars.course_id]" correlationId="#[correlationId]"/>
 		<error-handler ref="Global-Error-Handler" />
     
 </flow>
@@ -146,7 +146,14 @@ output application/json --- payload default error.description]]]></http:body>
                 <ee:set-variable variableName="course_id">attributes.uriParams.'course_id'</ee:set-variable>
             </ee:variables>
         </ee:transform>
-		<canvas:search-course-users doc:name="Course - List users in course" doc:id="93da97cf-58ef-4234-a545-832ab6007877" config-ref="Canvas_config" course_id="#[vars.course_id]" correlationId="#[correlationId]"/>
+		<choice doc:name="Choice" doc:id="bb57dfb3-054d-49d0-b997-fe15c510bae0" >
+			<when expression="#[isEmpty(attributes.queryParams)]">
+				<canvas:course-list-users-in-course doc:name="Course List Users In Course" doc:id="bd701faa-26a7-41cf-976d-06df7a06a83d" config-ref="Canvas_config" course_id="#[vars.course_id]" correlationId="#[correlationId]" />
+			</when>
+			<otherwise >
+				<canvas:course-list-users-in-course doc:name="Course List Users In Course" doc:id="4e0e4472-57f4-4cd1-b8c9-f2d68d8cc43c" config-ref="Canvas_config" course_id="#[vars.course_id]" correlationId="#[correlationId]" search_term="#[attributes.queryParams.'search_term']" sort="#[attributes.queryParams.sort]" enrollment_type_s="#[attributes.queryParams.'enrollment_type[]']" enrollment_role="#[attributes.queryParams.enrollment_role]" enrollment_role_id="#[attributes.queryParams.enrollment_role_id]" section_ids_s="#[attributes.queryParams.'section_ids[]']" include_s="#[attributes.queryParams.'include[]']" user_id="#[attributes.queryParams.user_id]" user_ids_s="#[attributes.queryParams.'user_ids[]']" enrollment_state_s="#[attributes.queryParams.'enrollment_state[]']"/>
+			</otherwise>
+		</choice>
 		<error-handler ref="Global-Error-Handler" />
     
 </flow>
@@ -162,7 +169,14 @@ output application/json --- payload default error.description]]]></http:body>
                 <ee:set-variable variableName="course_id">attributes.uriParams.'course_id'</ee:set-variable>
             </ee:variables>
         </ee:transform>
-		<canvas:list-course-sections doc:name="Section - List course sections" doc:id="de75d45e-487f-4eb8-ba47-dab39175d2cd" config-ref="Canvas_config" course_id="#[vars.course_id]" correlationId="#[correlationId]"/>
+		<choice doc:name="Choice" doc:id="07360eed-2eb3-4041-858b-86701572071b" >
+			<when expression="#[isEmpty(attributes.queryParams)]">
+				<canvas:section-list-course-sections doc:name="Section List Course Sections" doc:id="6661e51a-dc38-4fce-8fbd-824bf2f29f03" config-ref="Canvas_config" course_id="#[vars.course_id]" correlationId="#[correlationId]" />
+			</when>
+			<otherwise >
+				<canvas:section-list-course-sections doc:name="Section List Course Sections" doc:id="f6432b13-209b-4f07-a524-ab578f6c4045" config-ref="Canvas_config" course_id="#[vars.course_id]" correlationId="#[correlationId]" include_s="#[attributes.queryParams.'include[]']" search_term="#[attributes.queryParams.'search_term']"/>
+			</otherwise>
+		</choice>
 		<error-handler ref="Global-Error-Handler" />
     
 </flow>
@@ -179,7 +193,14 @@ output application/json --- payload default error.description]]]></http:body>
                 <ee:set-variable variableName="id">attributes.uriParams.'id'</ee:set-variable>
             </ee:variables>
         </ee:transform>
-		<canvas:get-section-info doc:name="Section - Get section information" doc:id="6b8ed3d4-c863-498a-b12b-e1a3b88d9464" config-ref="Canvas_config" course_id="#[vars.course_id]" id="#[vars.id]" correlationId="#[correlationId]"/>
+		<choice doc:name="Choice" doc:id="4502898a-fb3b-4e3a-916b-5f91e1afb45c" >
+			<when expression="#[isEmpty(attributes.queryParams)]">
+				<canvas:section-get-section-information doc:name="Section Get Section Information" doc:id="ed76ba72-1fb2-4d71-9e6b-03925989f565" config-ref="Canvas_config" course_id="#[vars.course_id]" id="#[vars.id]" correlationId="#[correlationId]" />
+			</when>
+			<otherwise >
+				<canvas:section-get-section-information doc:name="Section Get Section Information" doc:id="d6679b39-7e56-4caf-b85c-ccbf3d3c3c2c" config-ref="Canvas_config" course_id="#[vars.course_id]" id="#[vars.id]" correlationId="#[correlationId]" include_s="#[attributes.queryParams.'include[]']"/>
+			</otherwise>
+		</choice>
 		<error-handler ref="Global-Error-Handler" />
     
 </flow>
@@ -196,7 +217,7 @@ output application/json --- payload default error.description]]]></http:body>
                 <ee:set-variable variableName="id">attributes.uriParams.'id'</ee:set-variable>
             </ee:variables>
         </ee:transform>
-		<canvas:get-course-user doc:name="Course - Get single user" doc:id="ba80ba1f-9e83-4f87-bd0b-9140d7fc43c6" config-ref="Canvas_config" course_id="#[vars.course_id]" id="#[vars.id]" correlationId="#[correlationId]"/>
+		<canvas:course-get-single-user doc:name="Course Get Single User" doc:id="0c3cd1a4-26c6-454b-b413-557e9efe7b77" config-ref="Canvas_config" course_id="#[vars.course_id]" id="#[vars.id]" correlationId="#[correlationId]"/>
 		<error-handler ref="Global-Error-Handler" />
     
 </flow>
@@ -213,7 +234,7 @@ output application/json --- payload default error.description]]]></http:body>
                 <ee:set-variable variableName="user_id">attributes.uriParams.'user_id'</ee:set-variable>
             </ee:variables>
         </ee:transform>
-		<canvas:get-user-progress doc:name="Course - Get user progress" doc:id="304bb4b1-c0ef-4da8-88fe-74cd342f5d84" config-ref="Canvas_config" course_id="#[vars.course_id]" user_id="#[vars.user_id]" correlationId="#[correlationId]"/>
+		<canvas:course-get-user-progress doc:name="Course Get User Progress" doc:id="ac7fc9a5-34c4-4c30-ab07-e8e922765569" config-ref="Canvas_config" course_id="#[vars.course_id]" user_id="#[vars.user_id]" correlationId="#[correlationId]"/>
 		<error-handler ref="Global-Error-Handler" />
     
 </flow>
@@ -229,7 +250,7 @@ output application/json --- payload default error.description]]]></http:body>
                 <ee:set-variable variableName="id">attributes.uriParams.'id'</ee:set-variable>
             </ee:variables>
         </ee:transform>
-		<canvas:get-course-by-id doc:name="Course - Get a single course" doc:id="e41bc3a0-32b9-4028-b250-0be97ec2b69d" config-ref="Canvas_config" id="#[vars.id]" correlationId="#[correlationId]"/>
+		<canvas:course-get-a-single-course doc:name="Course Get A Single Course" doc:id="b960e35c-30e6-4ff3-b344-6764993641bb" config-ref="Canvas_config" id="#[vars.id]" correlationId="#[correlationId]"/>
 		<error-handler ref="Global-Error-Handler" />
     
 </flow>
@@ -240,7 +261,7 @@ output application/json --- payload default error.description]]]></http:body>
 output application/json --- payload default error.description]]]></http:body>
 			</http:error-response>
 		</http:listener>
-		<canvas:get-upcoming-events doc:name="User - List upcomimg assignment, calender events" doc:id="1c8c738e-8e45-4635-baeb-aa4cb5a7b2fa" config-ref="Canvas_config" correlationId="#[correlationId]"/>
+		<canvas:user-list-upcoming-assignments-and-calendar-events doc:name="User List Upcoming Assignments And Calendar Events" doc:id="5621914b-cc11-4a79-9cc8-fc64f43de58c" config-ref="Canvas_config" correlationId="#[correlationId]"/>
 		<error-handler ref="Global-Error-Handler" />
     
 </flow>
@@ -256,7 +277,7 @@ output application/json --- payload default error.description]]]></http:body>
                 <ee:set-variable variableName="id">attributes.uriParams.'id'</ee:set-variable>
             </ee:variables>
         </ee:transform>
-		<canvas:get-user-by-id doc:name="User - Show user details" doc:id="3ec4f660-75ac-4661-ad51-50f56edd1e49" config-ref="Canvas_config" id="#[vars.id]" correlationId="#[correlationId]"/>
+		<canvas:user-show-user-details doc:name="User Show User Details" doc:id="11510d3e-e4be-47d6-9183-96e64e349117" config-ref="Canvas_config" id="#[vars.id]" correlationId="#[correlationId]"/>
 		<error-handler ref="Global-Error-Handler" />
     
 </flow>
@@ -272,7 +293,7 @@ output application/json --- payload default error.description]]]></http:body>
                 <ee:set-variable variableName="user_id">attributes.uriParams.'user_id'</ee:set-variable>
             </ee:variables>
         </ee:transform>
-		<canvas:get-user-courses doc:name="Course - List courses for users" doc:id="564333f2-275e-4ac6-a170-3e3f1a3b2896" config-ref="Canvas_config" user_id="#[vars.user_id]" correlationId="#[correlationId]"/>
+		<canvas:course-list-courses-for-users doc:name="Course List Courses For Users" doc:id="dcb9b872-7633-42aa-a403-9e5285d0d4d9" config-ref="Canvas_config" user_id="#[vars.user_id]" correlationId="#[correlationId]"/>
 		<error-handler ref="Global-Error-Handler" />
     
 </flow>
@@ -288,7 +309,14 @@ output application/json --- payload default error.description]]]></http:body>
                 <ee:set-variable variableName="user_id">attributes.uriParams.'user_id'</ee:set-variable>
             </ee:variables>
         </ee:transform>
-		<canvas:get-missing-submissions doc:name="Users - List Missing Submissions" doc:id="30cb15ed-0868-4a3f-976a-5f8929f984e6" config-ref="Canvas_config" user_id="#[vars.user_id]" correlationId="#[correlationId]"/>
+		<choice doc:name="Choice" doc:id="35c1a402-9322-4dd8-af38-5e6bc88494ea" >
+			<when expression="#[isEmpty(attributes.queryParams)]">
+				<canvas:users-list-missing-submissions doc:name="Users List Missing Submissions" doc:id="84b16450-b30f-41b2-a8ae-29629d425bb3" config-ref="Canvas_config" user_id="#[vars.user_id]" correlationId="#[correlationId]" />
+			</when>
+			<otherwise >
+				<canvas:users-list-missing-submissions doc:name="Users List Missing Submissions" doc:id="7e810444-e783-46cc-9761-e875f78c7ee3" config-ref="Canvas_config" user_id="#[vars.user_id]" correlationId="#[correlationId]" observed_user_id="#[attributes.queryParams.'observed_user_id']" getMissingSubmissions__include_s="#[attributes.queryParams.'include[]']" getMissingSubmissions__filter_s="#[attributes.queryParams.'filter[]']" getMissingSubmissions__course_ids_s="#[attributes.queryParams.'course_ids[]']"/>
+			</otherwise>
+		</choice>
 		<error-handler ref="Global-Error-Handler" />
     
 </flow>
@@ -304,7 +332,7 @@ output application/json --- payload default error.description]]]></http:body>
                 <ee:set-variable variableName="account_id">attributes.uriParams.'account_id'</ee:set-variable>
             </ee:variables>
         </ee:transform>
-		<canvas:create-course doc:name="Course - Create a new course" doc:id="4737e880-5142-4a95-8f57-a0d0aadaddc4" config-ref="Canvas_config" account_id="#[vars.account_id]" correlationId="#[correlationId]"/>
+		<canvas:course-create-a-new-course doc:name="Course Create A New Course" doc:id="0ba689da-f97b-4c56-866f-0d274a7204d3" config-ref="Canvas_config" account_id="#[vars.account_id]" correlationId="#[correlationId]"/>
 		<error-handler ref="Global-Error-Handler" />
     
 </flow>
@@ -320,7 +348,7 @@ output application/json --- payload default error.description]]]></http:body>
                 <ee:set-variable variableName="account_id">attributes.uriParams.'account_id'</ee:set-variable>
             </ee:variables>
         </ee:transform>
-		<canvas:create-user doc:name="User - Create a user" doc:id="c578f929-5718-48d5-b106-04b4501f3a92" config-ref="Canvas_config" account_id="#[vars.account_id]" correlationId="#[correlationId]"/>
+		<canvas:user-create-a-user doc:name="User Create A User" doc:id="f6243921-20ee-4ffe-a59b-a344f0f68ecf" config-ref="Canvas_config" account_id="#[vars.account_id]" correlationId="#[correlationId]"/>
 		<error-handler ref="Global-Error-Handler" />
     
 </flow>
@@ -336,7 +364,7 @@ output application/json --- payload default error.description]]]></http:body>
                 <ee:set-variable variableName="course_id">attributes.uriParams.'course_id'</ee:set-variable>
             </ee:variables>
         </ee:transform>
-		<canvas:create-course-section doc:name="Section - Create course section" doc:id="aebaecda-b37d-48f6-a1a2-d5322b0c1f4d" config-ref="Canvas_config" course_id="#[vars.course_id]" correlationId="#[correlationId]"/>
+		<canvas:section-create-course-section doc:name="Section Create Course Section" doc:id="8118be4c-c2b8-488b-b66a-4fe66643bec5" config-ref="Canvas_config" course_id="#[vars.course_id]" correlationId="#[correlationId]"/>
 		<error-handler ref="Global-Error-Handler" />
     
 </flow>
@@ -353,9 +381,9 @@ output application/json --- payload default error.description]]]></http:body>
                 <ee:set-variable variableName="new_course_id">attributes.uriParams.'new_course_id'</ee:set-variable>
             </ee:variables>
         </ee:transform>
-		<canvas:crosslist-section doc:name="Section - Cross-list a section" doc:id="e7b35157-a6e8-4b6b-a9ee-1304c1aabd1a" config-ref="Canvas_config" id="#[vars.id]" new_course_id="#[vars.new_course_id]" correlationId="#[correlationId]">
+		<canvas:section-cross-list-a-section doc:name="Section Cross List A Section" doc:id="1f2646b2-90a2-4c70-a082-21575df17077" config-ref="Canvas_config" id="#[vars.id]" new_course_id="#[vars.new_course_id]" correlationId="#[correlationId]">
 			<canvas:crosslist-section--body ><![CDATA[#[payload]]]></canvas:crosslist-section--body>
-		</canvas:crosslist-section>
+		</canvas:section-cross-list-a-section>
 		<error-handler ref="Global-Error-Handler" />
     
 </flow>
@@ -366,7 +394,14 @@ output application/json --- payload default error.description]]]></http:body>
 output application/json --- payload default error.description]]]></http:body>
 			</http:error-response>
 		</http:listener>
-		<canvas:list-accounts doc:name="Account - List accounts" doc:id="b95793bf-2aba-439c-aba1-7af49d166e75" config-ref="Canvas_config" correlationId="#[correlationId]"/>
+		<choice doc:name="Choice" doc:id="85d8dc22-e778-4d7e-89e6-fc3d3e1c4f20" >
+			<when expression="#[isEmpty(attributes.queryParams)]">
+				<canvas:account-list-accounts doc:name="Account List Accounts" doc:id="9505c6a6-dc09-4b1c-9302-72857d253476" config-ref="Canvas_config" correlationId="#[correlationId]"/>
+			</when>
+			<otherwise >
+				<canvas:account-list-accounts doc:name="Account List Accounts" doc:id="76f632ff-f086-459b-a2fb-aa38862fa06b" config-ref="Canvas_config" include_s="#[attributes.queryParams.'include[]']" correlationId="#[correlationId]"/>
+			</otherwise>
+		</choice>
 		<error-handler ref="Global-Error-Handler" />
     
 </flow>
@@ -382,7 +417,14 @@ output application/json --- payload default error.description]]]></http:body>
                 <ee:set-variable variableName="account_id">attributes.uriParams.'account_id'</ee:set-variable>
             </ee:variables>
         </ee:transform>
-		<canvas:list-sub-accounts doc:name="Account - Get the sub-accounts of an account" doc:id="1b0f3d86-e432-487a-ab29-905520c24fa2" config-ref="Canvas_config" account_id="#[vars.account_id]" correlationId="#[correlationId]"/>
+		<choice doc:name="Choice" doc:id="187742c2-6895-4617-865a-5f8d089e8b17" >
+			<when expression="#[isEmpty(attributes.queryParams)]">
+				<canvas:account-get-the-sub-accounts-of-an-account doc:name="Account Get The Sub Accounts Of An Account" doc:id="67bb9eb1-291d-4d34-9ee6-5912a85c6411" config-ref="Canvas_config" account_id="#[vars.account_id]" correlationId="#[correlationId]" recursive="#[isEmpty(attributes.queryParams.recursive)]"/>
+			</when>
+			<otherwise >
+				<canvas:account-get-the-sub-accounts-of-an-account doc:name="Account Get The Sub Accounts Of An Account" doc:id="0e63afe3-fa65-42b6-94d8-d670716d2cf2" config-ref="Canvas_config" account_id="#[vars.account_id]" correlationId="#[correlationId]" recursive="#[isEmpty(attributes.queryParams.recursive)]" order="#[attributes.queryParams.order]" include_s="#[attributes.queryParams.'include[]']"/>
+			</otherwise>
+		</choice>
 		<error-handler ref="Global-Error-Handler" />
     
 </flow>
@@ -398,7 +440,7 @@ output application/json --- payload default error.description]]]></http:body>
                 <ee:set-variable variableName="id">attributes.uriParams.'id'</ee:set-variable>
             </ee:variables>
         </ee:transform>
-		<canvas:get-account doc:name="Account - Get a single account" doc:id="0343a571-6b06-45ec-b203-ecd93319bf0d" config-ref="Canvas_config" id="#[vars.id]" correlationId="#[correlationId]"/>
+		<canvas:account-get-a-single-account doc:name="Account Get A Single Account" doc:id="66d35af3-fbab-412d-ad6a-cf304b5872a8" config-ref="Canvas_config" id="#[vars.id]" correlationId="#[correlationId]"/>
 		<error-handler ref="Global-Error-Handler" />
     
 </flow>
@@ -414,7 +456,7 @@ output application/json --- payload default error.description]]]></http:body>
                 <ee:set-variable variableName="user_id"><![CDATA[attributes.uriParams.'user_id']]></ee:set-variable>
             </ee:variables>
         </ee:transform>
-		<canvas:get-user-courses doc:name="Course - List courses for users" doc:id="62b7cc5b-a033-44f6-ac1c-62fff20429dd" config-ref="Canvas_config" user_id="#[vars.user_id]" correlationId="#[correlationId]"/>
+		<canvas:course-list-courses-for-users doc:name="Course List Courses For Users" doc:id="8f876f0b-9756-429c-83f5-dd9a9ef74d86" config-ref="Canvas_config" user_id="#[vars.user_id]" correlationId="#[correlationId]"/>
 		<error-handler ref="Global-Error-Handler" />
     
 </flow>
@@ -431,7 +473,7 @@ output application/json --- payload default error.description]]]></http:body>
                 <ee:set-variable variableName="id">attributes.uriParams.'id'</ee:set-variable>
             </ee:variables>
         </ee:transform>
-		<canvas:edit-user-login doc:name="Login - Edit a user login" doc:id="fad87dda-90e8-448e-964f-5a0ffa0d13d3" config-ref="Canvas_config" account_id="#[vars.account_id]" id="#[vars.id]" correlationId="#[correlationId]"/>
+		<canvas:login-edit-a-user-login doc:name="Login Edit A User Login" doc:id="f1760c32-0181-4c4d-ad92-9409a52a6257" config-ref="Canvas_config" account_id="#[vars.account_id]" id="#[vars.id]" correlationId="#[correlationId]"/>
 		<error-handler ref="Global-Error-Handler" />
     
 </flow>
@@ -448,7 +490,7 @@ output application/json --- payload default error.description]]]></http:body>
                 <ee:set-variable variableName="id">attributes.uriParams.'id'</ee:set-variable>
             </ee:variables>
         </ee:transform>
-		<canvas:update-enrollment-term doc:name="Enrollment Terms - Update enrollment term" doc:id="09ac1ebd-e401-4f31-a2f3-04e4395beb14" config-ref="Canvas_config" account_id="#[vars.account_id]" id="#[vars.id]" correlationId="#[correlationId]"/>
+		<canvas:enrollment-terms-update-enrollment-term doc:name="Enrollment Terms Update Enrollment Term" doc:id="58ee414a-1baa-4c72-a845-8e35a8d3c9cf" config-ref="Canvas_config" account_id="#[vars.account_id]" id="#[vars.id]" correlationId="#[correlationId]"/>
 		<error-handler ref="Global-Error-Handler" />
     
 </flow>
@@ -465,7 +507,7 @@ output application/json --- payload default error.description]]]></http:body>
                 <ee:set-variable variableName="id">attributes.uriParams.'id'</ee:set-variable>
             </ee:variables>
         </ee:transform>
-		<canvas:reactivate-enrollment doc:name="Enrollment - Reactivate an enrollment" doc:id="f9b51ad2-497b-410a-a18a-82e01885114a" config-ref="Canvas_config" course_id="#[vars.course_id]" id="#[vars.id]" correlationId="#[correlationId]"/>
+		<canvas:enrollment-reactivate-an-enrollment doc:name="Enrollment Reactivate An Enrollment" doc:id="764c3e81-f752-426f-bb5a-2e5169bdf459" config-ref="Canvas_config" course_id="#[vars.course_id]" id="#[vars.id]" correlationId="#[correlationId]"/>
 		<error-handler ref="Global-Error-Handler" />
     
 </flow>
@@ -482,7 +524,7 @@ output application/json --- payload default error.description]]]></http:body>
                 <ee:set-variable variableName="id">attributes.uriParams.'id'</ee:set-variable>
             </ee:variables>
         </ee:transform>
-		<canvas:delete-enrollment-term doc:name="Enrollment Terms - Delete enrollment term" doc:id="04314068-03d8-4287-99ee-53ebd48e75b1" config-ref="Canvas_config" account_id="#[vars.account_id]" id="#[vars.id]" correlationId="#[correlationId]"/>
+		<canvas:enrollment-terms-delete-enrollment-term doc:name="Enrollment Terms Delete Enrollment Term" doc:id="da72fcf0-2386-4861-9fef-43879abae6dd" config-ref="Canvas_config" account_id="#[vars.account_id]" id="#[vars.id]" correlationId="#[correlationId]"/>
 		<error-handler ref="Global-Error-Handler" />
     
 </flow>
@@ -499,7 +541,14 @@ output application/json --- payload default error.description]]]></http:body>
                 <ee:set-variable variableName="id">attributes.uriParams.'id'</ee:set-variable>
             </ee:variables>
         </ee:transform>
-		<canvas:conclude-enrollment doc:name="Enrollment - Conclude , deactivate , or delete an enrollment" doc:id="a4371b83-753a-4357-a7a7-27304f0f2877" config-ref="Canvas_config" course_id="#[vars.course_id]" id="#[vars.id]" correlationId="#[correlationId]"/>
+		<choice doc:name="Choice" doc:id="3b34670d-5815-4db3-acfc-20c7f1b189fa" >
+			<when expression="#[isEmpty(attributes.queryParams)]">
+				<canvas:enrollment-conclude-deactivate-or-delete-an-enrollment doc:name="Enrollment Conclude Deactivate Or Delete An Enrollment" doc:id="44a1b8ed-d9aa-4f41-9493-94e681e711bd" config-ref="Canvas_config" course_id="#[vars.course_id]" id="#[vars.id]" correlationId="#[correlationId]"/>
+			</when>
+			<otherwise >
+				<canvas:enrollment-conclude-deactivate-or-delete-an-enrollment doc:name="Enrollment Conclude Deactivate Or Delete An Enrollment" doc:id="c680f32f-bc35-48f0-a85a-dbe5738cf9a5" config-ref="Canvas_config" course_id="#[vars.course_id]" id="#[vars.id]" task='#[attributes.queryParams.task default "conclude"]' correlationId="#[correlationId]" />
+			</otherwise>
+		</choice>
 		<error-handler ref="Global-Error-Handler" />
     
 </flow>
@@ -516,7 +565,7 @@ output application/json --- payload default error.description]]]></http:body>
                 <ee:set-variable variableName="id">attributes.uriParams.'id'</ee:set-variable>
             </ee:variables>
         </ee:transform>
-		<canvas:delete-user-login doc:name="Login - Delete a user login" doc:id="910f6973-a958-4c2c-9186-d4d435c7c79f" config-ref="Canvas_config" user_id="#[vars.user_id]" id="#[vars.id]" correlationId="#[correlationId]"/>
+		<canvas:login-delete-a-user-login doc:name="Login Delete A User Login" doc:id="286e0170-b5a0-4c73-8979-91626c336767" config-ref="Canvas_config" user_id="#[vars.user_id]" id="#[vars.id]" correlationId="#[correlationId]"/>
 		<error-handler ref="Global-Error-Handler" />
     
 </flow>
@@ -532,7 +581,7 @@ output application/json --- payload default error.description]]]></http:body>
                 <ee:set-variable variableName="account_id">attributes.uriParams.'account_id'</ee:set-variable>
             </ee:variables>
         </ee:transform>
-		<canvas:list-account-courses doc:name="Account - List active courses in an account" doc:id="ebd50791-8607-44af-b217-c1190d9b7ae2" config-ref="Canvas_config" account_id="#[vars.account_id]" correlationId="#[correlationId]"/>
+		<canvas:account-list-active-courses-in-an-account doc:name="Account List Active Courses In An Account" doc:id="d56311f3-89f8-4244-8734-c39bbc06d4ad" config-ref="Canvas_config" account_id="#[vars.account_id]" correlationId="#[correlationId]"/>
 		<error-handler ref="Global-Error-Handler" />
     
 </flow>
@@ -549,7 +598,7 @@ output application/json --- payload default error.description]]]></http:body>
                 <ee:set-variable variableName="id">attributes.uriParams.'id'</ee:set-variable>
             </ee:variables>
         </ee:transform>
-		<canvas:get-enrollment-by-id doc:name="Enrollment - Get enrollment by ID" doc:id="f960050b-03e0-40fa-8a64-0068d7879785" config-ref="Canvas_config" account_id="#[vars.account_id]" id="#[vars.id]" correlationId="#[correlationId]"/>
+		<canvas:enrollment-get-enrollment-by-id doc:name="Enrollment Get Enrollment By ID" doc:id="eb94b075-9a29-4570-aa69-79d1a8e1cff6" config-ref="Canvas_config" account_id="#[vars.account_id]" id="#[vars.id]" correlationId="#[correlationId]"/>
 		<error-handler ref="Global-Error-Handler" />
     
 </flow>
@@ -565,7 +614,14 @@ output application/json --- payload default error.description]]]></http:body>
                 <ee:set-variable variableName="account_id">attributes.uriParams.'account_id'</ee:set-variable>
             </ee:variables>
         </ee:transform>
-		<canvas:list-roles doc:name="Roles - List roles" doc:id="5da6da6d-8887-4e7d-9e90-54d949dce047" config-ref="Canvas_config" account_id="#[vars.account_id]" correlationId="#[correlationId]"/>
+		<choice doc:name="Choice" doc:id="07c68d3b-cb12-4935-b3b1-1ce1e0af8c87" >
+			<when expression="#[isEmpty(attributes.queryParams)]">
+				<canvas:roles-list-roles doc:name="Roles List Roles" doc:id="3ff489b9-9b2b-4016-b8a1-bcd85ffdf9a2" config-ref="Canvas_config" account_id="#[vars.account_id]" correlationId="#[correlationId]" show_inherited="#[isEmpty(attributes.queryParams.'show_inherited')]"/>
+			</when>
+			<otherwise >
+				<canvas:roles-list-roles doc:name="Roles List Roles" doc:id="c5782857-7eb7-4940-8e85-6480338d1f1d" config-ref="Canvas_config" account_id="#[vars.account_id]" correlationId="#[correlationId]" show_inherited="#[isEmpty(attributes.queryParams.'show_inherited')]"/>
+			</otherwise>
+		</choice>
 		<error-handler ref="Global-Error-Handler" />
     
 </flow>
@@ -582,7 +638,14 @@ output application/json --- payload default error.description]]]></http:body>
                 <ee:set-variable variableName="id">attributes.uriParams.'id'</ee:set-variable>
             </ee:variables>
         </ee:transform>
-		<canvas:get-role doc:name="Roles - Get a single role" doc:id="efd1d0fa-ca4e-41f6-8127-6458267442ca" config-ref="Canvas_config" account_id="#[vars.account_id]" id="#[vars.id]" correlationId="#[correlationId]"/>
+		<choice doc:name="Choice" doc:id="34b58f17-b707-4236-b424-9b869c5a2c59" >
+			<when expression="#[isEmpty(attributes.queryParams)]">
+				<canvas:roles-get-a-single-role doc:name="Roles Get A Single Role" doc:id="d89ec7ea-cee4-4c9a-a5d6-f9da2cfdac10" config-ref="Canvas_config" account_id="#[vars.account_id]" id="#[vars.id]" correlationId="#[correlationId]" />
+			</when>
+			<otherwise >
+				<canvas:roles-get-a-single-role doc:name="Roles Get A Single Role" doc:id="046b082d-0d40-4b50-a276-38e1a941206d" config-ref="Canvas_config" account_id="#[vars.account_id]" id="#[vars.id]" correlationId="#[correlationId]" role_id="#[attributes.queryParams.'role_id']" role="#[attributes.queryParams.role]"/>
+			</otherwise>
+		</choice>
 		<error-handler ref="Global-Error-Handler" />
     
 </flow>
@@ -598,7 +661,7 @@ output application/json --- payload default error.description]]]></http:body>
                 <ee:set-variable variableName="account_id">attributes.uriParams.'account_id'</ee:set-variable>
             </ee:variables>
         </ee:transform>
-		<canvas:list-enrollment-terms doc:name="Enrollment Terms - List enrollment terms" doc:id="9d9607b0-6d47-4433-ac0c-d005234059cf" config-ref="Canvas_config" account_id="#[vars.account_id]" correlationId="#[correlationId]"/>
+		<canvas:enrollment-terms-list-enrollment-terms doc:name="Enrollment Terms List Enrollment Terms" doc:id="9488a362-9e65-4c41-a6b1-a9f2d7075903" config-ref="Canvas_config" account_id="#[vars.account_id]" correlationId="#[correlationId]"/>
 		<error-handler ref="Global-Error-Handler" />
     
 </flow>
@@ -615,7 +678,7 @@ output application/json --- payload default error.description]]]></http:body>
                 <ee:set-variable variableName="id">attributes.uriParams.'id'</ee:set-variable>
             </ee:variables>
         </ee:transform>
-		<canvas:get-enrollment-term doc:name="Enrollment Terms - Retrieve enrollment term" doc:id="fd5a7ff1-5f4c-4a24-9f83-26959a8bf65c" config-ref="Canvas_config" account_id="#[vars.account_id]" id="#[vars.id]" correlationId="#[correlationId]"/>
+		<canvas:enrollment-terms-retrieve-enrollment-term doc:name="Enrollment Terms Retrieve Enrollment Term" doc:id="a4902edb-2ab3-45da-8551-5ba8ab4a5c52" config-ref="Canvas_config" account_id="#[vars.account_id]" id="#[vars.id]" correlationId="#[correlationId]"/>
 		<error-handler ref="Global-Error-Handler" />
     
 </flow>
@@ -631,7 +694,7 @@ output application/json --- payload default error.description]]]></http:body>
                 <ee:set-variable variableName="course_id">attributes.uriParams.'course_id'</ee:set-variable>
             </ee:variables>
         </ee:transform>
-		<canvas:list-assignment-groups doc:name="Assignment Groups - List assignment groups" doc:id="4ffc1383-5148-498c-89b2-147734afa533" config-ref="Canvas_config" course_id="#[vars.course_id]" correlationId="#[correlationId]"/>
+		<canvas:assignment-groups-list-assignment-groups doc:name="Assignment Groups List Assignment Groups" doc:id="8e081e20-d088-420f-8f84-0f2d73a316f2" config-ref="Canvas_config" course_id="#[vars.course_id]" correlationId="#[correlationId]"/>
 		<error-handler ref="Global-Error-Handler" />
     
 </flow>
@@ -648,7 +711,7 @@ output application/json --- payload default error.description]]]></http:body>
                 <ee:set-variable variableName="assignment_group_id">attributes.uriParams.'assignment_group_id'</ee:set-variable>
             </ee:variables>
         </ee:transform>
-		<canvas:list-assignments-by-group doc:name="Assignment - List assignments by assignment groups" doc:id="9a94852c-8b36-4a23-a639-5a3781bcbdfa" config-ref="Canvas_config" course_id="#[vars.course_id]" assignment_group_id="#[vars.assignment_group_id]" correlationId="#[correlationId]"/>
+		<canvas:assignment-list-assignments-by-assignment-groups doc:name="Assignment List Assignments By Assignment Groups" doc:id="7b5bb737-e863-4097-b327-0a7103abe7e7" config-ref="Canvas_config" course_id="#[vars.course_id]" assignment_group_id="#[vars.assignment_group_id]" correlationId="#[correlationId]"/>
 		<error-handler ref="Global-Error-Handler" />
     
 </flow>
@@ -664,7 +727,7 @@ output application/json --- payload default error.description]]]></http:body>
                 <ee:set-variable variableName="course_id">attributes.uriParams.'course_id'</ee:set-variable>
             </ee:variables>
         </ee:transform>
-		<canvas:list-assignments doc:name="Assignment - List assignments" doc:id="7287803d-4137-493e-bb84-2667ed329ddd" config-ref="Canvas_config" course_id="#[vars.course_id]" correlationId="#[correlationId]"/>
+		<canvas:assignment-list-assignments doc:name="Assignment List Assignments" doc:id="fc2cae09-454e-4625-ab04-066366e22e8b" config-ref="Canvas_config" course_id="#[vars.course_id]" correlationId="#[correlationId]"/>
 		<error-handler ref="Global-Error-Handler" />
     
 </flow>
@@ -680,11 +743,18 @@ output application/json --- payload default error.description]]]></http:body>
                 <ee:set-variable variableName="course_id">attributes.uriParams.'course_id'</ee:set-variable>
             </ee:variables>
         </ee:transform>
-		<canvas:list-course-enrollments doc:name="Enrollment - List course enrollments" doc:id="d39bab09-7e64-4a07-9266-0a71cc2810cd" config-ref="Canvas_config" course_id="#[vars.course_id]" correlationId="#[correlationId]"/>
+		<choice doc:name="Choice" doc:id="16ef874c-38da-4d2d-9b2d-7c543f4aadce" >
+			<when expression="#[isEmpty(attributes.queryParams)]">
+				<canvas:enrollment-list-course-enrollments doc:name="Enrollment List Course Enrollments" doc:id="5936f13f-3117-4d5c-bcda-b0ec616a3811" config-ref="Canvas_config" course_id="#[vars.course_id]" correlationId="#[correlationId]" />
+			</when>
+			<otherwise >
+				<canvas:enrollment-list-course-enrollments doc:name="Enrollment List Course Enrollments" doc:id="552f60b8-1c82-4f81-b11d-6c140af428c0" config-ref="Canvas_config" course_id="#[vars.course_id]" correlationId="#[correlationId]" type_s="#[attributes.queryParams.'type[]']" role_s="#[attributes.queryParams.'role[]']" state_s="#[attributes.queryParams.'state[]']" include_s="#[attributes.queryParams.'include[]']" user_id="#[attributes.queryParams.'user_id']" grading_period_id="#[attributes.queryParams.'grading_period_id']" enrollment_term_id="#[attributes.queryParams.'enrollment_term_id']" sis_account_id_s="#[attributes.queryParams.'sis_account_id[]']" sis_course_id_s="#[attributes.queryParams.'sis_course_id[]']" sis_section_id_s="#[attributes.queryParams.'sis_section_id[]']" sis_user_id_s="#[attributes.queryParams.'sis_user_id[]']" created_for_sis_id_s="#[isEmpty(attributes.queryParams.'created_for_sis_id[]')]"/>
+			</otherwise>
+		</choice>
 		<error-handler ref="Global-Error-Handler" />
     
 </flow>
-    <flow name="get:\courses\(course_id)\students\submissions:canvas-lms-api-config">
+	<flow name="get:\courses\(course_id)\students\submissions:canvas-lms-api-config">
         <http:listener doc:name="Listener" doc:id="a2888470-8af6-4394-9ae9-9d245d675c06" config-ref="HTTP_Listener_config" path="/courses/{course_id}/students/submissions" allowedMethods="GET" >
 			<http:error-response statusCode="#[vars.httpStatus default 500]" >
 				<http:body ><![CDATA[#[%dw 2.0
@@ -696,7 +766,14 @@ output application/json --- payload default error.description]]]></http:body>
                 <ee:set-variable variableName="course_id">attributes.uriParams.'course_id'</ee:set-variable>
             </ee:variables>
         </ee:transform>
-		<canvas:list-course-submissions doc:name="Submission - List submissions for multiple assignments" doc:id="117014eb-5aba-4ad1-bfed-13e5ef4f4f65" config-ref="Canvas_config" course_id="#[vars.course_id]" correlationId="#[correlationId]"/>
+		<choice doc:name="Choice" doc:id="3256b927-e016-4dde-b763-f4ff1252e654" >
+			<when expression="#[isEmpty(attributes.queryParams)]">
+				<canvas:submission-list-submissions-for-multiple-assignments doc:name="Submission List Submissions For Multiple Assignments" doc:id="d49b7681-b6ad-4cc3-a235-03aa9fa0e19d" config-ref="Canvas_config" course_id="#[vars.course_id]" correlationId="#[correlationId]" grouped="#[isEmpty(attributes.queryParams.grouped)]" post_to_sis="#[isEmpty(attributes.queryParams.'post_to_sis')]" state_based_on_date="#[isEmpty(attributes.queryParams.'state_based_on_date')]"/>
+			</when>
+			<otherwise >
+				<canvas:submission-list-submissions-for-multiple-assignments doc:name="Submission List Submissions For Multiple Assignments" doc:id="2880ffac-112f-4c5d-ab0e-fe3cb3f94205" config-ref="Canvas_config" course_id="#[vars.course_id]" correlationId="#[correlationId]" student_ids_s="#[attributes.queryParams.'student_ids[]']" assignment_ids_s="#[attributes.queryParams.'assignment_ids[]']" grouped="#[isEmpty(attributes.queryParams.grouped)]" post_to_sis="#[isEmpty(attributes.queryParams.'post_to_sis')]" submitted_since="#[attributes.queryParams.'submitted_since']" graded_since="#[attributes.queryParams.'graded_since']" grading_period_id="#[attributes.queryParams.'grading_period_id']" workflow_state="#[attributes.queryParams.'workflow_state']" enrollment_state="#[attributes.queryParams.'enrollment_state']" state_based_on_date="#[isEmpty(attributes.queryParams.'state_based_on_date')]" order="#[attributes.queryParams.order]" order_direction="#[attributes.queryParams.'order_direction']" include_s="#[attributes.queryParams.'include[]']"/>
+			</otherwise>
+		</choice>
 		<error-handler ref="Global-Error-Handler" />
     
 </flow>
@@ -712,7 +789,14 @@ output application/json --- payload default error.description]]]></http:body>
                 <ee:set-variable variableName="section_id">attributes.uriParams.'section_id'</ee:set-variable>
             </ee:variables>
         </ee:transform>
-		<canvas:list-section-enrollments doc:name="Enrollment - List section enrollments" doc:id="7b1fe830-6993-46f1-bdbd-af49d8159471" config-ref="Canvas_config" section_id="#[vars.section_id]" correlationId="#[correlationId]"/>
+		<choice doc:name="Choice" doc:id="671cbe73-af19-488f-b32a-df4db1e53ab0" >
+			<when expression="#[isEmpty(attributes.queryParams)]">
+				<canvas:enrollment-list-section-enrollments doc:name="Enrollment List Section Enrollments" doc:id="a219701b-e4c8-4948-95ad-d7f58cc0c191" config-ref="Canvas_config" section_id="#[vars.section_id]" correlationId="#[correlationId]" created_for_sis_id_s="#[isEmpty(attributes.queryParams.'created_for_sis_id[]')]"/>
+			</when>
+			<otherwise >
+				<canvas:enrollment-list-section-enrollments doc:name="Enrollment List Section Enrollments" doc:id="97342a9e-003c-4fe7-ad96-9f16b901981f" config-ref="Canvas_config" section_id="#[vars.section_id]" correlationId="#[correlationId]" type_s="#[attributes.queryParams.'type[]']" role_s="#[attributes.queryParams.'role[]']" state_s="#[attributes.queryParams.'state[]']" include_s="#[attributes.queryParams.'include[]']" user_id="#[attributes.queryParams.'user_id']" grading_period_id="#[attributes.queryParams.'grading_period_id']" enrollment_term_id="#[attributes.queryParams.'enrollment_term_id']" sis_account_id_s="#[attributes.queryParams.'sis_account_id[]']" sis_course_id_s="#[attributes.queryParams.'sis_course_id[]']" sis_section_id_s="#[attributes.queryParams.'sis_section_id[]']" sis_user_id_s="#[attributes.queryParams.'sis_user_id[]']" created_for_sis_id_s="#[isEmpty(attributes.queryParams.'created_for_sis_id[]')]"/>
+			</otherwise>
+		</choice>
 		<error-handler ref="Global-Error-Handler" />
     
 </flow>
@@ -728,7 +812,14 @@ output application/json --- payload default error.description]]]></http:body>
                 <ee:set-variable variableName="section_id">attributes.uriParams.'section_id'</ee:set-variable>
             </ee:variables>
         </ee:transform>
-		<canvas:list-section-submissions doc:name="Submission - List submission from course section" doc:id="b8bd9127-1c10-44a4-9692-83c7d90d8c5b" config-ref="Canvas_config" section_id="#[vars.section_id]" correlationId="#[correlationId]"/>
+		<choice doc:name="Choice" doc:id="6fd13da3-7a22-44a0-b3aa-6c04f86b9d7c" >
+			<when expression="#[isEmpty(attributes.queryParams)]">
+				<canvas:submission-list-submissions-from-course-section doc:name="Submission List Submissions From Course Section" doc:id="36941267-08f2-4690-be84-e511564b43de" config-ref="Canvas_config" section_id="#[vars.section_id]" correlationId="#[correlationId]" grouped="#[isEmpty(attributes.queryParams.grouped)]" post_to_sis="#[isEmpty(attributes.queryParams.'post_to_sis')]" state_based_on_date="#[isEmpty(attributes.queryParams.'state_based_on_date')]"/>
+			</when>
+			<otherwise >
+				<canvas:submission-list-submissions-from-course-section doc:name="Submission List Submissions From Course Section" doc:id="eb98ca6c-1cf2-4028-9b86-fc5d26710eef" config-ref="Canvas_config" section_id="#[vars.section_id]" correlationId="#[correlationId]" student_ids_s="#[attributes.queryParams.'student_ids[]']" assignment_ids_s="#[attributes.queryParams.'assignment_ids[]']" grouped="#[isEmpty(attributes.queryParams.grouped)]" post_to_sis="#[isEmpty(attributes.queryParams.'post_to_sis')]" submitted_since="#[attributes.queryParams.'submitted_since']" graded_since="#[attributes.queryParams.'graded_since']" grading_period_id="#[attributes.queryParams.'grading_period_id']" workflow_state="#[attributes.queryParams.'workflow_state']" enrollment_state="#[attributes.queryParams.'enrollment_state']" state_based_on_date="#[isEmpty(attributes.queryParams.'state_based_on_date')]" order="#[attributes.queryParams.order]" order_direction="#[attributes.queryParams.'order_direction']" include_s="#[attributes.queryParams.'include[]']"/>
+			</otherwise>
+		</choice>
 		<error-handler ref="Global-Error-Handler" />
     
 </flow>
@@ -744,11 +835,18 @@ output application/json --- payload default error.description]]]></http:body>
                 <ee:set-variable variableName="user_id">attributes.uriParams.'user_id'</ee:set-variable>
             </ee:variables>
         </ee:transform>
-		<canvas:list-user-enrollments doc:name="Enrollment - List user enrollments" doc:id="0be24d0e-caa0-408d-859c-8e0e197283fa" config-ref="Canvas_config" user_id="#[vars.user_id]" correlationId="#[correlationId]"/>
+		<choice doc:name="Choice" doc:id="988c93a1-f578-4636-bb6a-94d8739dd030" >
+			<when expression="#[isEmpty(attributes.queryParams)]">
+				<canvas:enrollment-list-user-enrollments doc:name="Enrollment List User Enrollments" doc:id="d0ff2d51-abcd-46b7-aa4c-b70896e9a82a" config-ref="Canvas_config" user_id="#[vars.user_id]" correlationId="#[correlationId]" created_for_sis_id_s="#[isEmpty(attributes.queryParams.'created_for_sis_id[]')]"/>
+			</when>
+			<otherwise >
+				<canvas:enrollment-list-user-enrollments doc:name="Enrollment List User Enrollments" doc:id="79a5e6cc-2f41-49f2-9274-b4ed23f98ca1" config-ref="Canvas_config" user_id="#[vars.user_id]" correlationId="#[correlationId]" type_s="#[attributes.queryParams.'type[]']" role_s="#[attributes.queryParams.'role[]']" state_s="#[attributes.queryParams.'state[]']" include_s="#[attributes.queryParams.'include[]']" grading_period_id="#[attributes.queryParams.'grading_period_id']" enrollment_term_id="#[attributes.queryParams.'enrollment_term_id']" sis_account_id_s="#[attributes.queryParams.'sis_account_id[]']" sis_course_id_s="#[attributes.queryParams.'sis_course_id[]']" sis_section_id_s="#[attributes.queryParams.'sis_section_id[]']" sis_user_id_s="#[attributes.queryParams.'sis_user_id[]']" created_for_sis_id_s="#[isEmpty(attributes.queryParams.'created_for_sis_id[]')]"/>
+			</otherwise>
+		</choice>
 		<error-handler ref="Global-Error-Handler" />
     
 </flow>
-    <flow name="post:\accounts\(account_id)\bulk_enrollment:application\json:canvas-lms-api-config">
+	<flow name="post:\accounts\(account_id)\bulk_enrollment:application\json:canvas-lms-api-config">
         <http:listener doc:name="Listener" doc:id="ad3c4f38-6266-4dfb-b487-9a5eb5df5eba" config-ref="HTTP_Listener_config" path="/accounts/{account_id}/bulk_enrollment" allowedMethods="POST" >
 			<http:error-response statusCode="#[vars.httpStatus default 500]" >
 				<http:body ><![CDATA[#[%dw 2.0
@@ -760,7 +858,7 @@ output application/json --- payload default error.description]]]></http:body>
                 <ee:set-variable variableName="account_id">attributes.uriParams.'account_id'</ee:set-variable>
             </ee:variables>
         </ee:transform>
-		<canvas:bulk-enroll-users doc:name="Enrollment - Enroll multiple users to one or more courses" doc:id="31965a8b-9033-4eb1-8a17-eebfbc562f5c" config-ref="Canvas_config" account_id="#[vars.account_id]" correlationId="#[correlationId]"/>
+		<canvas:enrollment-enroll-multiple-users-to-one-or-more doc:name="Enrollment Enroll Multiple Users To One Or More" doc:id="f1e19d32-5181-4596-8cec-5047aac94043" config-ref="Canvas_config" account_id="#[vars.account_id]" correlationId="#[correlationId]"/>
 		<error-handler ref="Global-Error-Handler" />
     
 </flow>
@@ -776,7 +874,7 @@ output application/json --- payload default error.description]]]></http:body>
                 <ee:set-variable variableName="account_id">attributes.uriParams.'account_id'</ee:set-variable>
             </ee:variables>
         </ee:transform>
-		<canvas:create-user-login doc:name="Login - Create a user login" doc:id="053ea506-d5d1-436f-be7c-0d83da679e1f" config-ref="Canvas_config" account_id="#[vars.account_id]" correlationId="#[correlationId]"/>
+		<canvas:login-create-a-user-login doc:name="Login Create A User Login" doc:id="be3887d1-5c6b-444c-9519-9ac154ee40fa" config-ref="Canvas_config" account_id="#[vars.account_id]" correlationId="#[correlationId]"/>
 		<error-handler ref="Global-Error-Handler" />
     
 </flow>
@@ -792,9 +890,7 @@ output application/json --- payload default error.description]]]></http:body>
                 <ee:set-variable variableName="account_id">attributes.uriParams.'account_id'</ee:set-variable>
             </ee:variables>
         </ee:transform>
-		<canvas:create-enrollment-term doc:name="Enrollment Terms - Create enrollment term" doc:id="26e8b554-e745-4536-8e52-37414018ac43" config-ref="Canvas_config" account_id="#[vars.'account_id']" correlationId="#[correlationId]">
-			<canvas:create-enrollment-term--body ><![CDATA[#[if(!isEmpty(payload)) payload else {}]]]></canvas:create-enrollment-term--body>
-		</canvas:create-enrollment-term>
+		<canvas:enrollment-terms-create-enrollment-term doc:name="Enrollment Terms Create Enrollment Term" doc:id="b399d676-b682-447d-93b2-f1d016d2b3cb" config-ref="Canvas_config" account_id="#[vars.account_id]" correlationId="#[correlationId]"/>
 		<error-handler ref="Global-Error-Handler" />
     
 </flow>
@@ -810,7 +906,14 @@ output application/json --- payload default error.description]]]></http:body>
                 <ee:set-variable variableName="course_id">attributes.uriParams.'course_id'</ee:set-variable>
             </ee:variables>
         </ee:transform>
-		<canvas:list-course-enrollments doc:name="Enrollment - List course enrollments" doc:id="0d51af6e-1b3d-4ac5-bd09-031d345a3b9f" config-ref="Canvas_config" course_id="#[vars.course_id]" correlationId="#[correlationId]"/>
+		<choice doc:name="Choice" doc:id="520dd43e-271a-40ea-88b1-34eab4a6b17e" >
+			<when expression="#[isEmpty(attributes.queryParams)]">
+				<canvas:enrollment-list-course-enrollments doc:name="Enrollment List Course Enrollments" doc:id="da5a092e-567e-4244-8bf3-3b442d964d22" config-ref="Canvas_config" course_id="#[vars.course_id]" correlationId="#[correlationId]" created_for_sis_id_s="#[isEmpty(attributes.queryParams.'created_for_sis_id[]')]"/>
+			</when>
+			<otherwise >
+				<canvas:enrollment-list-course-enrollments doc:name="Enrollment List Course Enrollments" doc:id="a3349210-354b-43ed-ae3e-751bac9febf1" config-ref="Canvas_config" course_id="#[vars.course_id]" correlationId="#[correlationId]" type_s="#[attributes.queryParams.'type[]']" role_s="#[attributes.queryParams.'role[]']" state_s="#[attributes.queryParams.'state[]']" include_s="#[attributes.queryParams.'include[]']" user_id="#[attributes.queryParams.'user_id']" grading_period_id="#[attributes.queryParams.'grading_period_id']" enrollment_term_id="#[attributes.queryParams.'enrollment_term_id']" sis_account_id_s="#[attributes.queryParams.'sis_account_id[]']" sis_course_id_s="#[attributes.queryParams.'sis_course_id[]']" sis_section_id_s="#[attributes.queryParams.'sis_section_id[]']" sis_user_id_s="#[attributes.queryParams.'sis_user_id[]']" created_for_sis_id_s="#[isEmpty(attributes.queryParams.'created_for_sis_id[]')]"/>
+			</otherwise>
+		</choice>
 		<error-handler ref="Global-Error-Handler" />
     
 </flow>
@@ -826,7 +929,14 @@ output application/json --- payload default error.description]]]></http:body>
                 <ee:set-variable variableName="section_id">attributes.uriParams.'section_id'</ee:set-variable>
             </ee:variables>
         </ee:transform>
-		<canvas:list-section-enrollments doc:name="Enrollment - List section enrollments" doc:id="c7ee6139-9c53-4d42-88e2-774645ec44c9" config-ref="Canvas_config" section_id="#[vars.section_id]" correlationId="#[correlationId]"/>
+		<choice doc:name="Choice" doc:id="111b79a8-d756-4730-8d99-4b7a0f02bcaf" >
+			<when expression="#[isEmpty(attributes.queryParams)]">
+				<canvas:enrollment-list-section-enrollments doc:name="Enrollment List Section Enrollments" doc:id="4d60e75c-7679-4f86-b00d-09d06486805a" config-ref="Canvas_config" section_id="#[vars.section_id]" created_for_sis_id_s="#[isEmpty(attributes.queryParams.'created_for_sis_id[]')]"/>
+			</when>
+			<otherwise >
+				<canvas:enrollment-list-section-enrollments doc:name="Enrollment List Section Enrollments" doc:id="526b09be-6fd9-45f4-a3db-983ff65fbdc0" config-ref="Canvas_config" section_id="#[vars.section_id]" type_s="#[attributes.queryParams.'type[]']" role_s="#[attributes.queryParams.'role[]']" state_s="#[attributes.queryParams.'state[]']" include_s="#[attributes.queryParams.'include[]']" user_id="#[attributes.queryParams.'user_id']" grading_period_id="#[attributes.queryParams.'grading_period_id']" enrollment_term_id="#[attributes.queryParams.'enrollment_term_id']" sis_account_id_s="#[attributes.queryParams.'sis_account_id[]']" sis_course_id_s="#[attributes.queryParams.'sis_course_id[]']" sis_section_id_s="#[attributes.queryParams.'sis_section_id[]']" sis_user_id_s="#[attributes.queryParams.'sis_user_id[]']" created_for_sis_id_s="#[isEmpty(attributes.queryParams.'created_for_sis_id[]')]" correlationId="#[correlationId]"/>
+			</otherwise>
+		</choice>
 		<error-handler ref="Global-Error-Handler" />
     
 </flow>

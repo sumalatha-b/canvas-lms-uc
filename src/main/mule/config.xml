@@ -8,7 +8,7 @@ http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/htt
 http://www.mulesoft.org/schema/mule/tls http://www.mulesoft.org/schema/mule/tls/current/mule-tls.xsd
 http://www.mulesoft.org/schema/mule/salesforce http://www.mulesoft.org/schema/mule/salesforce/current/mule-salesforce.xsd">
 	<canvas:config name="Canvas_config" doc:name="Canvas config" doc:id="375bb809-6e0f-4798-b958-050b8405b86b" >
-		<canvas:bearer-auth-connection baseUri="https://salesforce.instructure.com/api/v1" token="15721~B4DcruuVWkL3TUFcLteuNBcLuuF7Wzn4eVGGUD8A348MVhVBDUQHvwEyMvZkwHZn" />
+		<canvas:bearer-auth-connection baseUri="https://salesforce.instructure.com/api/v1" token="15721~WTznLJxtxwYKYHGYCcRG8cZN9BPUfDYhaxvh4aF9WTaW2fEaGkxL9zYyz3Rfk8X4" />
 	</canvas:config>
 	<configuration doc:name="Configuration" doc:id="0d4caf85-e32c-45c6-b553-5ccbd26a9a0f" defaultErrorHandler-ref="Global-Error-Handler" />
 	<configuration-properties doc:name="Configuration properties" doc:id="9c0da026-86eb-4a00-ab40-28a97f7bbabb" file="config.yaml" />
@@ -22,4 +22,7 @@ http://www.mulesoft.org/schema/mule/salesforce http://www.mulesoft.org/schema/mu
 	<salesforce:sfdc-config name="Salesforce_Config" doc:name="Salesforce Config" doc:id="716a0888-f561-499e-af0c-38a520c0f495" >
 		<salesforce:basic-connection username="aurosmit.sahoo@nexturn.com.lms.educloud" password="Aurosmit@2001" securityToken="wEpfQlYMXv8VvhsNwrGqlptQl" />
 	</salesforce:sfdc-config>
+	<canvas:config name="Canvas_config1" doc:name="Canvas config" doc:id="4d591e57-efb9-4a4a-b6ba-d5c15c402b4d" >
+		<canvas:bearer-auth-connection token="15721~WTznLJxtxwYKYHGYCcRG8cZN9BPUfDYhaxvh4aF9WTaW2fEaGkxL9zYyz3Rfk8X4" baseUri="https://salesforce.instructure.com/api/v1"/>
+	</canvas:config>
 </mule>
