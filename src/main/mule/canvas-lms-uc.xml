@@ -419,7 +419,7 @@ output application/json --- payload default error.description]]]></http:body>
         </ee:transform>
 		<choice doc:name="Choice" doc:id="187742c2-6895-4617-865a-5f8d089e8b17" >
 			<when expression="#[isEmpty(attributes.queryParams)]">
-				<canvas:account-get-the-sub-accounts-of-an-account doc:name="Account Get The Sub Accounts Of An Account" doc:id="67bb9eb1-291d-4d34-9ee6-5912a85c6411" config-ref="Canvas_config" account_id="#[vars.account_id]" correlationId="#[correlationId]" recursive="#[isEmpty(attributes.queryParams.recursive)]"/>
+				<canvas:account-get-the-sub-accounts-of-an-account doc:name="Account Get The Sub Accounts Of An Account" doc:id="7fd22dde-2469-4886-829b-b90c59789af8" config-ref="Canvas_config" account_id="#[vars.account_id]" correlationId="#[correlationId]"/>
 			</when>
 			<otherwise >
 				<canvas:account-get-the-sub-accounts-of-an-account doc:name="Account Get The Sub Accounts Of An Account" doc:id="0e63afe3-fa65-42b6-94d8-d670716d2cf2" config-ref="Canvas_config" account_id="#[vars.account_id]" correlationId="#[correlationId]" recursive="#[isEmpty(attributes.queryParams.recursive)]" order="#[attributes.queryParams.order]" include_s="#[attributes.queryParams.'include[]']"/>
@@ -768,7 +768,18 @@ output application/json --- payload default error.description]]]></http:body>
         </ee:transform>
 		<choice doc:name="Choice" doc:id="3256b927-e016-4dde-b763-f4ff1252e654" >
 			<when expression="#[isEmpty(attributes.queryParams)]">
-				<canvas:submission-list-submissions-for-multiple-assignments doc:name="Submission List Submissions For Multiple Assignments" doc:id="d49b7681-b6ad-4cc3-a235-03aa9fa0e19d" config-ref="Canvas_config" course_id="#[vars.course_id]" correlationId="#[correlationId]" grouped="#[isEmpty(attributes.queryParams.grouped)]" post_to_sis="#[isEmpty(attributes.queryParams.'post_to_sis')]" state_based_on_date="#[isEmpty(attributes.queryParams.'state_based_on_date')]"/>
+				<canvas:submission-list-submissions-for-multiple-assignments doc:name="Submission List Submissions For Multiple Assignments" doc:id="d49b7681-b6ad-4cc3-a235-03aa9fa0e19d" config-ref="Canvas_config" course_id="#[vars.course_id]" correlationId="#[correlationId]"/>
+				<ee:transform doc:name="Transform Message" doc:id="2b419e53-b540-433c-8f8d-12e9d2123395" >
+					<ee:message >
+						<ee:set-payload ><![CDATA[%dw 2.0
+output application/json
+---
+
+flatten(payload.submissions) default payload
+
+]]></ee:set-payload>
+					</ee:message>
+				</ee:transform>
 			</when>
 			<otherwise >
 				<canvas:submission-list-submissions-for-multiple-assignments doc:name="Submission List Submissions For Multiple Assignments" doc:id="2880ffac-112f-4c5d-ab0e-fe3cb3f94205" config-ref="Canvas_config" course_id="#[vars.course_id]" correlationId="#[correlationId]" student_ids_s="#[attributes.queryParams.'student_ids[]']" assignment_ids_s="#[attributes.queryParams.'assignment_ids[]']" grouped="#[isEmpty(attributes.queryParams.grouped)]" post_to_sis="#[isEmpty(attributes.queryParams.'post_to_sis')]" submitted_since="#[attributes.queryParams.'submitted_since']" graded_since="#[attributes.queryParams.'graded_since']" grading_period_id="#[attributes.queryParams.'grading_period_id']" workflow_state="#[attributes.queryParams.'workflow_state']" enrollment_state="#[attributes.queryParams.'enrollment_state']" state_based_on_date="#[isEmpty(attributes.queryParams.'state_based_on_date')]" order="#[attributes.queryParams.order]" order_direction="#[attributes.queryParams.'order_direction']" include_s="#[attributes.queryParams.'include[]']"/>
@@ -814,7 +825,18 @@ output application/json --- payload default error.description]]]></http:body>
         </ee:transform>
 		<choice doc:name="Choice" doc:id="6fd13da3-7a22-44a0-b3aa-6c04f86b9d7c" >
 			<when expression="#[isEmpty(attributes.queryParams)]">
-				<canvas:submission-list-submissions-from-course-section doc:name="Submission List Submissions From Course Section" doc:id="36941267-08f2-4690-be84-e511564b43de" config-ref="Canvas_config" section_id="#[vars.section_id]" correlationId="#[correlationId]" grouped="#[isEmpty(attributes.queryParams.grouped)]" post_to_sis="#[isEmpty(attributes.queryParams.'post_to_sis')]" state_based_on_date="#[isEmpty(attributes.queryParams.'state_based_on_date')]"/>
+				<canvas:submission-list-submissions-from-course-section doc:name="Submission List Submissions From Course Section" doc:id="36941267-08f2-4690-be84-e511564b43de" config-ref="Canvas_config" section_id="#[vars.section_id]" correlationId="#[correlationId]"/>
+				<ee:transform doc:name="Transform Message" doc:id="20458840-90fc-4387-8bb2-4a53ddf7ad3e" >
+					<ee:message >
+						<ee:set-payload ><![CDATA[%dw 2.0
+output application/json
+---
+
+flatten(payload.submissions) default payload
+
+]]></ee:set-payload>
+					</ee:message>
+				</ee:transform>
 			</when>
 			<otherwise >
 				<canvas:submission-list-submissions-from-course-section doc:name="Submission List Submissions From Course Section" doc:id="eb98ca6c-1cf2-4028-9b86-fc5d26710eef" config-ref="Canvas_config" section_id="#[vars.section_id]" correlationId="#[correlationId]" student_ids_s="#[attributes.queryParams.'student_ids[]']" assignment_ids_s="#[attributes.queryParams.'assignment_ids[]']" grouped="#[isEmpty(attributes.queryParams.grouped)]" post_to_sis="#[isEmpty(attributes.queryParams.'post_to_sis')]" submitted_since="#[attributes.queryParams.'submitted_since']" graded_since="#[attributes.queryParams.'graded_since']" grading_period_id="#[attributes.queryParams.'grading_period_id']" workflow_state="#[attributes.queryParams.'workflow_state']" enrollment_state="#[attributes.queryParams.'enrollment_state']" state_based_on_date="#[isEmpty(attributes.queryParams.'state_based_on_date')]" order="#[attributes.queryParams.order]" order_direction="#[attributes.queryParams.'order_direction']" include_s="#[attributes.queryParams.'include[]']"/>
@@ -906,14 +928,7 @@ output application/json --- payload default error.description]]]></http:body>
                 <ee:set-variable variableName="course_id">attributes.uriParams.'course_id'</ee:set-variable>
             </ee:variables>
         </ee:transform>
-		<choice doc:name="Choice" doc:id="520dd43e-271a-40ea-88b1-34eab4a6b17e" >
-			<when expression="#[isEmpty(attributes.queryParams)]">
-				<canvas:enrollment-list-course-enrollments doc:name="Enrollment List Course Enrollments" doc:id="da5a092e-567e-4244-8bf3-3b442d964d22" config-ref="Canvas_config" course_id="#[vars.course_id]" correlationId="#[correlationId]" created_for_sis_id_s="#[isEmpty(attributes.queryParams.'created_for_sis_id[]')]"/>
-			</when>
-			<otherwise >
-				<canvas:enrollment-list-course-enrollments doc:name="Enrollment List Course Enrollments" doc:id="a3349210-354b-43ed-ae3e-751bac9febf1" config-ref="Canvas_config" course_id="#[vars.course_id]" correlationId="#[correlationId]" type_s="#[attributes.queryParams.'type[]']" role_s="#[attributes.queryParams.'role[]']" state_s="#[attributes.queryParams.'state[]']" include_s="#[attributes.queryParams.'include[]']" user_id="#[attributes.queryParams.'user_id']" grading_period_id="#[attributes.queryParams.'grading_period_id']" enrollment_term_id="#[attributes.queryParams.'enrollment_term_id']" sis_account_id_s="#[attributes.queryParams.'sis_account_id[]']" sis_course_id_s="#[attributes.queryParams.'sis_course_id[]']" sis_section_id_s="#[attributes.queryParams.'sis_section_id[]']" sis_user_id_s="#[attributes.queryParams.'sis_user_id[]']" created_for_sis_id_s="#[isEmpty(attributes.queryParams.'created_for_sis_id[]')]"/>
-			</otherwise>
-		</choice>
+		<canvas:enrollment-enroll-user-in-a-course doc:name="Enrollment Enroll User In A Course" doc:id="0194bfaa-7e90-4d1d-b85c-67fd4e91e063" config-ref="Canvas_config" course_id="#[vars.course_id]" correlationId="#[correlationId]"/>
 		<error-handler ref="Global-Error-Handler" />
     
 </flow>
@@ -929,14 +944,7 @@ output application/json --- payload default error.description]]]></http:body>
                 <ee:set-variable variableName="section_id">attributes.uriParams.'section_id'</ee:set-variable>
             </ee:variables>
         </ee:transform>
-		<choice doc:name="Choice" doc:id="111b79a8-d756-4730-8d99-4b7a0f02bcaf" >
-			<when expression="#[isEmpty(attributes.queryParams)]">
-				<canvas:enrollment-list-section-enrollments doc:name="Enrollment List Section Enrollments" doc:id="4d60e75c-7679-4f86-b00d-09d06486805a" config-ref="Canvas_config" section_id="#[vars.section_id]" created_for_sis_id_s="#[isEmpty(attributes.queryParams.'created_for_sis_id[]')]"/>
-			</when>
-			<otherwise >
-				<canvas:enrollment-list-section-enrollments doc:name="Enrollment List Section Enrollments" doc:id="526b09be-6fd9-45f4-a3db-983ff65fbdc0" config-ref="Canvas_config" section_id="#[vars.section_id]" type_s="#[attributes.queryParams.'type[]']" role_s="#[attributes.queryParams.'role[]']" state_s="#[attributes.queryParams.'state[]']" include_s="#[attributes.queryParams.'include[]']" user_id="#[attributes.queryParams.'user_id']" grading_period_id="#[attributes.queryParams.'grading_period_id']" enrollment_term_id="#[attributes.queryParams.'enrollment_term_id']" sis_account_id_s="#[attributes.queryParams.'sis_account_id[]']" sis_course_id_s="#[attributes.queryParams.'sis_course_id[]']" sis_section_id_s="#[attributes.queryParams.'sis_section_id[]']" sis_user_id_s="#[attributes.queryParams.'sis_user_id[]']" created_for_sis_id_s="#[isEmpty(attributes.queryParams.'created_for_sis_id[]')]" correlationId="#[correlationId]"/>
-			</otherwise>
-		</choice>
+		<canvas:enrollment-enroll-a-user-in-a-section doc:name="Enrollment Enroll A User In A Section" doc:id="42c24588-0d78-467a-9720-30d7bdbf7129" config-ref="Canvas_config" section_id="#[vars.section_id]" correlationId="#[correlationId]"/>
 		<error-handler ref="Global-Error-Handler" />
     
 </flow>
