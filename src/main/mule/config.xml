@@ -1,15 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<mule xmlns:salesforce="http://www.mulesoft.org/schema/mule/salesforce" xmlns:tls="http://www.mulesoft.org/schema/mule/tls"
-	xmlns:http="http://www.mulesoft.org/schema/mule/http"
-	xmlns:canvas="http://www.mulesoft.org/schema/connectivity/canvas" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+<mule xmlns:os="http://www.mulesoft.org/schema/mule/os" xmlns:salesforce="http://www.mulesoft.org/schema/mule/salesforce"
+	xmlns:tls="http://www.mulesoft.org/schema/mule/tls"
+	xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns:canvas="http://www.mulesoft.org/schema/connectivity/canvas" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
 http://www.mulesoft.org/schema/connectivity/canvas http://www.mulesoft.org/schema/connectivity/canvas/current/mule-canvas.xsd
 http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
 http://www.mulesoft.org/schema/mule/tls http://www.mulesoft.org/schema/mule/tls/current/mule-tls.xsd
-http://www.mulesoft.org/schema/mule/salesforce http://www.mulesoft.org/schema/mule/salesforce/current/mule-salesforce.xsd">
-	<canvas:config name="Canvas_config" doc:name="Canvas config" doc:id="375bb809-6e0f-4798-b958-050b8405b86b" >
-		<canvas:bearer-auth-connection baseUri="https://salesforce.instructure.com/api/v1" token="15721~WTznLJxtxwYKYHGYCcRG8cZN9BPUfDYhaxvh4aF9WTaW2fEaGkxL9zYyz3Rfk8X4" />
-	</canvas:config>
+http://www.mulesoft.org/schema/mule/salesforce http://www.mulesoft.org/schema/mule/salesforce/current/mule-salesforce.xsd
+http://www.mulesoft.org/schema/mule/os http://www.mulesoft.org/schema/mule/os/current/mule-os.xsd">
 	<configuration doc:name="Configuration" doc:id="0d4caf85-e32c-45c6-b553-5ccbd26a9a0f" defaultErrorHandler-ref="Global-Error-Handler" />
 	<configuration-properties doc:name="Configuration properties" doc:id="9c0da026-86eb-4a00-ab40-28a97f7bbabb" file="config.yaml" />
 	<http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" doc:id="23743b45-a919-4bde-bdbd-5686ce9cd5d0" >
@@ -22,7 +20,12 @@ http://www.mulesoft.org/schema/mule/salesforce http://www.mulesoft.org/schema/mu
 	<salesforce:sfdc-config name="Salesforce_Config" doc:name="Salesforce Config" doc:id="716a0888-f561-499e-af0c-38a520c0f495" >
 		<salesforce:basic-connection username="aurosmit.sahoo@nexturn.com.lms.educloud" password="Aurosmit@2001" securityToken="wEpfQlYMXv8VvhsNwrGqlptQl" />
 	</salesforce:sfdc-config>
-	<canvas:config name="Canvas_config1" doc:name="Canvas config" doc:id="4d591e57-efb9-4a4a-b6ba-d5c15c402b4d" >
-		<canvas:bearer-auth-connection token="15721~WTznLJxtxwYKYHGYCcRG8cZN9BPUfDYhaxvh4aF9WTaW2fEaGkxL9zYyz3Rfk8X4" baseUri="https://salesforce.instructure.com/api/v1"/>
+	<canvas:config name="Canvas_config" doc:name="Canvas config" doc:id="c75c456b-e047-4b81-9d31-41edba41d959" >
+		<canvas:oauth_2_0-connection baseUri="https://salesforce.instructure.com/api/v1" >
+			<canvas:oauth-authorization-code consumerKey="157210000000000002" consumerSecret="XmQYRKyYtmrBMaNzMrDXxccnE3utWrnkT27cmRVMTRxMUeMTQLHDaDyDtNTPxxUV" resourceOwnerId="canvas" />
+			<canvas:oauth-callback-config listenerConfig="HTTP_Listener_config" callbackPath="/callback" authorizePath="/authorize" externalCallbackUrl="https://canvas-lms-uc-loq25c.5sc6y6-3.usa-e2.cloudhub.io/callback"/>
+			<canvas:oauth-store-config objectStore="Object_store" />
+		</canvas:oauth_2_0-connection>
 	</canvas:config>
+	<os:object-store name="Object_store" doc:name="Object store" doc:id="c7dfd0ec-ff8d-49e2-9b83-71c75482ab91" />
 </mule>

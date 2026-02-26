@@ -20,7 +20,7 @@ output application/json --- payload default error.description]]]></http:body>
 				<ee:set-variable variableName="id" ><![CDATA[attributes.uriParams.'id']]></ee:set-variable>
 			</ee:variables>
 		</ee:transform>
-		<canvas:course-get-a-single-course doc:name="Course Get A Single Course" doc:id="954d15d2-5c01-429c-83ff-aef53e7d43bb" config-ref="Canvas_config" id="#[vars.id]" correlationId="#[correlationId]"/>
+		<canvas:course-get-a-single-course doc:name="Course Get A Single Course" doc:id="954d15d2-5c01-429c-83ff-aef53e7d43bb" id="#[vars.id]" correlationId="#[correlationId]" config-ref="Canvas_config"/>
 		<ee:transform doc:name="sfRequestPayload" doc:id="8395f539-0c26-451f-9298-d830c5db81f2" >
 			<ee:message >
 				<ee:set-payload ><![CDATA[%dw 2.0
@@ -92,7 +92,7 @@ output application/json --- payload default error.description]]]></http:body>
 				<ee:set-variable variableName="id" ><![CDATA[attributes.uriParams.'id']]></ee:set-variable>
 			</ee:variables>
 		</ee:transform>
-		<canvas:course-get-a-single-course doc:name="Course Get A Single Course" doc:id="94115e47-e6ed-4ec1-9dbf-4203938b13f8" config-ref="Canvas_config" id="#[vars.id]" correlationId="#[correlationId]"/>
+		<canvas:course-get-a-single-course doc:name="Course Get A Single Course" doc:id="94115e47-e6ed-4ec1-9dbf-4203938b13f8" id="#[vars.id]" correlationId="#[correlationId]" config-ref="Canvas_config"/>
 		<ee:transform doc:name="sfRequestPayload" doc:id="c27ea829-2a87-4d66-927b-c2d2bc48503e" >
 			<ee:message >
 				<ee:set-payload ><![CDATA[%dw 2.0
